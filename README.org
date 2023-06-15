@@ -18,8 +18,7 @@ you can also install the requirements with pip if you dont use pipenv (you shoul
 pip install -r requirements.txt
 #+end_src
 *** Config
-The configuration is just like pwnagotchi since, where is an example config
-
+The configuration is just like pwnagotchi since. Here is an example config.
 #+begin_src toml :tangle ./example-config.toml
 devices.android-phone.enabled = true          # the name of this entry is android-phone
 devices.android-phone.search_order = 1         # in which order the devices should
