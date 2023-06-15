@@ -50,7 +50,34 @@ Now i will need to find a better solution but for now just run it as root. [fn:3
 sudo blue.py --config example-config.toml
 #+end_src
 
-*** TODO create systemd service/crontab
+*** crontab
+A easy way to have this run at boot is to use crontab
+you can also use systemd but crontab is easy
+#+begin_src shell
+sudo crontab -e # we are editing root's crontab
+#+end_src
+Then inside the crontab put this line
+#+begin_example
+@reboot /usr/bin/python <path to script> --config <path to config>
+#+end_example
+And when you reboot it will start the script
+
+*** Troubleshooting
+
+if for whatever reason it does not connect you can use bluetoothctl to pair and trust your device mac
+
+#+begin_src shell
+bluetoothctl
+#+end_src
+#+begin_src shell
+discoverable on
+scan on
+pair <mac of your phone>
+# enter yes for the pair prompts
+trust <mac>
+disconnect <mac>
+#+end_src
+it is important that you disconnect. if your phone prompts you to allow internet sharing, hit yes.
 * Footnotes
 
 [fn:3] Please open a issue if i dont fix this
