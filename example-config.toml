@@ -1,0 +1,19 @@
+devices.android-phone.enabled = true          # the name of this entry is android-phone
+devices.android-phone.search_order = 1         # in which order the devices should
+                                                                      ## be searched. E.g. this is #1
+devices.android-phone.mac = "mac"                 # you need to put your phones
+                                                                      ## bt-mac here (settings > status)
+devices.android-phone.ip = "192.168.44.2"     # this is the static ip of your pwnagotchi
+                                                                      ## adjust this to your phones pan-network
+                                                                      ## (run "ifconfig bt-pan" on your phone)
+devices.android-phone.netmask = 24             # netmask of the PAN
+devices.android-phone.interval = 1             # in minutes, how often should
+                                                                      ## the device be searched
+devices.android-phone.scantime = 10            # in seconds, how long should be searched
+                                                                      ## on each interval
+devices.android-phone.max_tries = 0           # how many times it should try to find the
+                                                                      ## phone (0 = endless)
+devices.android-phone.share_internet = true   # set to true if you want to have
+                                                                      ## internet via bluetooth
+devices.android-phone.priority = 1             # the device with the highest
+                                                                      ## priority wins (1 = highest)

@@ -1,0 +1,60 @@
+#+title: Readme
+
+* Rpi Bluetooth
+rpi bluetooth allows you to pair your phone to your raspberry pi (or linux computer) to provide a PAN network. [fn:1]
+I will have to find some way allowing it to run as non root user.
+
+
+credits for the OG code goes to evilsocket, all i did here was lift the code and strip out pwnagotchi, it worked perfectly in the past so i copied it. [fn:2]
+** Setup and installation
+
+#+begin_src shell
+git clone https://github.com/lost-rob0t/pi-ble-network.git
+cd pi-ble-network
+pipenv run blue.py -c config.toml
+#+end_src
+you can also install the requirements with pip if you dont use pipenv (you should use it)
+#+begin_src shell
+pip install -r requirements.txt
+#+end_src
+*** Config
+The configuration is just like pwnagotchi since, where is an example config
+
+#+begin_src toml :tangle ./example-config.toml
+devices.android-phone.enabled = true          # the name of this entry is android-phone
+devices.android-phone.search_order = 1         # in which order the devices should
+                                                                      ## be searched. E.g. this is #1
+devices.android-phone.mac = "mac"                 # you need to put your phones
+                                                                      ## bt-mac here (settings > status)
+devices.android-phone.ip = "192.168.44.2"     # this is the static ip of your pwnagotchi
+                                                                      ## adjust this to your phones pan-network
+                                                                      ## (run "ifconfig bt-pan" on your phone)
+devices.android-phone.netmask = 24             # netmask of the PAN
+devices.android-phone.interval = 1             # in minutes, how often should
+                                                                      ## the device be searched
+devices.android-phone.scantime = 10            # in seconds, how long should be searched
+                                                                      ## on each interval
+devices.android-phone.max_tries = 0           # how many times it should try to find the
+                                                                      ## phone (0 = endless)
+devices.android-phone.share_internet = true   # set to true if you want to have
+                                                                      ## internet via bluetooth
+devices.android-phone.priority = 1             # the device with the highest
+                                                                      ## priority wins (1 = highest)
+
+#+end_src
+
+you can also add other phones by just adding another devices.<name> here
+
+*** Running
+Now i will need to find a better solution but for now just run it as root. [fn:3]
+#+begin_src shell
+sudo blue.py --config example-config.toml
+#+end_src
+
+*** TODO create systemd service/crontab
+* Footnotes
+
+[fn:3] Please open a issue if i dont fix this
+[fn:2] https://github.com/evilsocket/pwnagotchi
+
+[fn:1] https://en.wikipedia.org/wiki/Personal_area_network
